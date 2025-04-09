@@ -67,7 +67,7 @@ if __name__ == "__main__":
         print("Starting SSE server at http://localhost:8000/sse ...")
 
         # Run `uv run server.py` to start the SSE server
-        process = subprocess.Popen(["uv", "run", server_file])
+        process = subprocess.Popen(["uv", "run", "--python", "3.10", server_file])
         # Give it 3 seconds to start
         time.sleep(3)
 
