@@ -15,7 +15,8 @@ async def run(mcp_server: MCPServer):
         name="Assistant",
         instructions="Use the tools to answer the questions.",
         mcp_servers=[mcp_server],
-        model_settings=ModelSettings(tool_choice="required"),
+        model="gpt-4o",
+        model_settings=ModelSettings(tool_choice="auto", temperature=0.08, top_p=0.8),
     )
 
     # Use the `add` tool to add two numbers
@@ -32,6 +33,11 @@ async def run(mcp_server: MCPServer):
 
     # Run the `get_secret_word` tool
     message = "What's the secret word?"
+    print(f"\n\nRunning: {message}")
+    result = await Runner.run(starting_agent=agent, input=message)
+    print(result.final_output)
+
+    message = "What's the capital of France?"
     print(f"\n\nRunning: {message}")
     result = await Runner.run(starting_agent=agent, input=message)
     print(result.final_output)
